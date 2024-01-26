@@ -22,7 +22,7 @@ class StatusFactory extends Factory
     {
         return [
             'name' => $this->faker->sentence(1),
-            'description' => $this->faker->paragraph(),
+            'description' => $this->faker->paragraph(1),
             'order' => $this->faker->randomDigit(),
         ];
     }

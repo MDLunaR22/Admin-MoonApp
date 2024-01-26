@@ -12,7 +12,7 @@
 <body class="bg-body-primary" style="background-color: #EAE2B7;">
     <nav class="navbar navbar-expand-lg text-white" style="background-color: #003049;" data-bs-theme="dark">
         <div class="container-fluid container">
-            <a class="navbar-brand" href="home">MoonApp</a>
+            <a class="navbar-brand" href="/">MoonApp</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -21,33 +21,26 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('viewStatuses')}}">Statuses</a>
+                        <a class="nav-link {{(Route::is('viewStatuses') ? 'active' : '')}}" href="{{ route('viewStatuses') }}">Statuses</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('viewCustomers')}}">Customers</a>
+                        <a class="nav-link {{(Route::is('viewCustomers') ? 'active' : '')}} " href="{{ route('viewCustomers') }}">Customers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('viewPackages')}}">Package</a>
+                        <a class="nav-link {{Route::is('viewPackages') ? 'active' : ''}}" href="{{ route('viewPackages') }}">Package</a>
                     </li>
                 </ul>
-                <div class="btn-group" role="group">
-                    <a class="dropdown-toggle link-light" data-bs-toggle="dropdown" aria-expanded="false">
-                        Options
-                    </a>
-                    @if (Route::has('login'))
-                        @auth
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <form class="dropdown-item" action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="nav-link">Log out</button>
-                                    </form>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" class="nav-link" href="">Profile</a>
-                                </li>
-                            </ul>
-                        @else
+                @if (Route::has('login'))
+                    @auth
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="nav-link">Log out</button>
+                        </form>
+                    @else
+                        <div class="btn-group" role="group">
+                            <a class="dropdown-toggle link-light" data-bs-toggle="dropdown" aria-expanded="false">
+                                Options
+                            </a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <form class="dropdown-item" action="{{ route('login') }}">
@@ -60,9 +53,9 @@
                                     </form>
                                 </li>
                             </ul>
-                        @endauth
-                    @endif
-                </div>
+                        </div>
+                    @endauth
+                @endif
             </div>
         </div>
     </nav>

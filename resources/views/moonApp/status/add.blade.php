@@ -1,8 +1,7 @@
 @extends('app')
 @section('content')
     <div class="container">
-        
-        <div class="position-absolute top-50 start-50 translate-middle" style="width: 800px;">
+        <div class="w-75 position-absolute top-50 start-50 translate-middle" style="max-height: 600px; overflow: auto;">
             <h1 class="mb-3">Add Status</h1>
             <div class="bg-white p-5 rounded-4">
                 <form action="{{ route('addStatus') }}" method="POST">
@@ -13,16 +12,16 @@
                     </div>
                     @error('name')
                         <h6 class="alert alert-danger">
-                            {{ $error }}
+                            {{ $message }}
                         </h6>
                     @enderror
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea type="text" class="form-control" name="description" required></textarea>
+                        <textarea type="text" class="form-control" name="description"></textarea>
                     </div>
                     @error('description')
                         <h6 class="alert alert-danger">
-                            {{ $error }}
+                            {{ $message }}
                         </h6>
                     @enderror
                     <button type="submit" class="btn btn-primary">Add</button>

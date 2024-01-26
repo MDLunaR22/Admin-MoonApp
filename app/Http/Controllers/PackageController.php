@@ -11,19 +11,6 @@ class PackageController extends Controller
      * Display a listing of the resource.
      */
 
-     public function validate(Request $request)
-     {
-         $request->validate([
-             'tracking' => 'required|min:10',
-             'weight' => 'required|integer|min:1',
-             'description' => 'required',
-             'status_id' => 'required|integer',
-             'customer_id' => 'required|integer',
-         ]);
-
-         return redirect()->route('viewPackages');
-     }
-
     public function index()
     {
         $package = Package::all();

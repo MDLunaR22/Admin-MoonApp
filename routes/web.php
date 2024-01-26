@@ -31,9 +31,11 @@ Route::get('/', function () {
 
 // Route::get('/app', [UserController::class, 'show'])->name('myInfo');
 
-Route::get('/app/add/status', fn() => view('moonApp.status.add'))->name('viewAddStatus');
+Route::get('/app/add/status', fn() => view('moonApp.status.add'))->middleware('auth')->name('viewAddStatus');
+Route::get('/app/add/customer', fn() => view('moonApp.customer.add'))->middleware('auth')->name('viewAddCustomer');
+Route::get('/app/add/package', fn() => view('moonApp.package.add'))->middleware('auth')->name('viewAddPackage');
 
-Route::controller(PackageController::class)->group(function () {
+Route::controller(PackageController::class)->middleware('auth')->group(function () {
     Route::get('/app/packages', 'index')->name('viewPackages');
     Route::post('/app/add/package', 'store')->name('addPackage');
     Route::get('/app/show/package/{id}', 'show')->name('showPackage');
@@ -41,7 +43,7 @@ Route::controller(PackageController::class)->group(function () {
     Route::delete('/app/delete/package/{id}', 'destroy')->name('deletePackage');
 });
 
-Route::controller(CustomerController::class)->group(function () {
+Route::controller(CustomerController::class)->middleware('auth')->group(function () {
     Route::get('/app/customers', 'index')->name('viewCustomers');
     Route::post('/app/add/customer', 'store')->name('addCustomer');
     Route::get('/app/show/customer/{id}', 'show')->name('showCustomer');
@@ -49,7 +51,7 @@ Route::controller(CustomerController::class)->group(function () {
     Route::delete('/app/delete/customer/{id}', 'destroy')->name('deleteCustomer');
 });
 
-Route::controller(StatusController::class)->group(function () {
+Route::controller(StatusController::class)->middleware('auth')->group(function () {
     Route::get('/app/statuses', 'index')->name('viewStatuses');
     Route::post('/app/add/status', 'store')->name('addStatus');
     Route::get('/app/show/status{id}', 'show')->name('showStatus');

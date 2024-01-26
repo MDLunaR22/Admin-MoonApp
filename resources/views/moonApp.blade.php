@@ -57,10 +57,13 @@
                 </div>
                 <div class="row mt-4">
                     <div class="col-12">
-                        <a class="btn btn-light w-50"
-                            style="background-color: #003049; color:#EAE2B7; border-color: #EAE2B7;">
-                            <h3 class="fw-normal">Log out</h3>
-                        </a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-light w-50"
+                                style="background-color: #003049; color:#EAE2B7; border-color: #EAE2B7;">
+                                <h3 class="fw-normal">Log out</h3>
+                            </button>
+                        </form>
                     </div>
                 </div>
             @else
