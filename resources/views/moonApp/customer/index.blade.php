@@ -12,7 +12,6 @@
                         <th scope="col">Surname</th>
                         <th scope="col">Code</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Password</th>
                         <th scope="col">Phone</th>
                         <th scope="col">Options</th>
                     </tr>
@@ -25,7 +24,6 @@
                             <td>{{ $customer->surname }}</td>
                             <td>{{ $customer->code }}</td>
                             <td>{{ $customer->email }}</td>
-                            <td>{{ $customer->password }}</td>
                             <td>{{ $customer->phone }}</td>
                             <td>
                                 <form action="{{ route('showCustomer', [$customer->id]) }}">

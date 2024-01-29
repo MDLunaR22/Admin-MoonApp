@@ -47,7 +47,7 @@ class CustomerController extends Controller
 
     public function show($id){
         $customer = Customer::find($id);
-        return view('moonApp.showCustomer', ['customer' => $customer]);
+        return view('moonApp.customer.show', ['customer' => $customer]);
     }
 
     public function update(Request $request, $id)
@@ -58,6 +58,8 @@ class CustomerController extends Controller
 
         $customer = Customer::find($id);
         $customer -> name = $request->name;
+        $customer -> surname = $request->surname;
+        $customer -> phone = $request->phone;
         $customer->save();
 
         // return view('moonApp.index', ['succes' => 'Customer updated successfully']);

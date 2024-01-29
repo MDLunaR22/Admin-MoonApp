@@ -2,8 +2,8 @@
 @section('content')
     <div class="container">
         
-        <div class="position-absolute top-50 start-50 translate-middle" style="width: 800px;">
-            <h1 class="mb-3">Add Status</h1>
+        <div class="w-75 position-absolute top-50 start-50 translate-middle" style="max-height: 600px; overflow: auto;">
+            <h1 class="mb-3">Update Status</h1>
             <div class="bg-white p-5 rounded-4">
                 <form action="{{ route('updateStatus', [$status->id]) }}" method="POST">
                     @method('PUT')
@@ -14,7 +14,7 @@
                     </div>
                     @error('name')
                         <h6 class="alert alert-danger">
-                            {{ $error }}
+                            {{ $message }}
                         </h6>
                     @enderror
                     <div class="mb-3">
@@ -23,11 +23,11 @@
                     </div>
                     @error('description')
                         <h6 class="alert alert-danger">
-                            {{ $error }}
+                            {{ $message }}
                         </h6>
                     @enderror
                     <button type="submit" class="btn btn-primary">Update</button>
-                    <a  class="btn btn-secondary">Cancel</a>
+                    <a href="{{route('viewStatuses')}}" class="btn btn-secondary">Cancel</a>
                 </form>
             </div>
         </div>

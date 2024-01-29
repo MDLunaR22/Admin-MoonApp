@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Package;
+use App\Models\Status;
 use Illuminate\Http\Request;
 
 class PackageController extends Controller
@@ -30,7 +32,7 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect()->route('viewPackages');
     }
 
     /**
@@ -38,7 +40,11 @@ class PackageController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $package = Package::find($id);
+        $status = Status::all();
+        $customer = Customer::all();
+
+        return view('moonApp.package.show', ['packages' => $package, 'statuses' => $status, 'customers' => $customer]);
     }
 
     /**

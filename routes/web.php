@@ -47,14 +47,14 @@ Route::controller(CustomerController::class)->middleware('auth')->group(function
     Route::get('/app/customers', 'index')->name('viewCustomers');
     Route::post('/app/add/customer', 'store')->name('addCustomer');
     Route::get('/app/show/customer/{id}', 'show')->name('showCustomer');
-    Route::put('/app/update/customer{id}', 'update')->name('updateCustomer');
+    Route::put('/app/update/customer/{id}', 'update')->name('updateCustomer');
     Route::delete('/app/delete/customer/{id}', 'destroy')->name('deleteCustomer');
 });
 
 Route::controller(StatusController::class)->middleware('auth')->group(function () {
     Route::get('/app/statuses', 'index')->name('viewStatuses');
     Route::post('/app/add/status', 'store')->name('addStatus');
-    Route::get('/app/show/status{id}', 'show')->name('showStatus');
+    Route::get('/app/show/status/{id}', 'show')->name('showStatus');
     Route::put('/app/update/{id}', 'update')->name('updateStatus');
     Route::delete('/app/delete/status/{id}', 'destroy')->name('deleteStatus');
 });
