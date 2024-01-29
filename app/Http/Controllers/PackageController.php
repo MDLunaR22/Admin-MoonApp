@@ -24,7 +24,10 @@ class PackageController extends Controller
      */
     public function create()
     {
-        //
+        $customers = Customer::all();
+        $statuses = Status::all();
+
+        return view('moonApp.package.add', ['customers' => $customers, 'statuses' => $statuses]);
     }
 
     /**
@@ -32,6 +35,23 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'tracking'=> 'required|min:10',
+            'weight'=> 'required|numeric',
+            'description'=> 'required|min:7',
+            'status_id'=> 'required|numeric',
+            'customer_id'=> 'required|numeric',
+        ]);
+
+        $package = new Package();
+        $package->tracking = $request->tracking;
+        $package->weight = $request->weight;
+        $package->description = $request->description;
+        $package->status_id = $request->status_id;
+        $package->customer_id = $request->customer_id;
+
+        $package->save();
+
         return redirect()->route('viewPackages');
     }
 

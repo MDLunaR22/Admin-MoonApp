@@ -30,12 +30,7 @@
         @if (Route::has('login'))
             @auth
                 <div class="row">
-                    <div class="col-6">
-                        <a href="" class="btn btn-light w-50" style="background:#EAE2B7">
-                            <h3 class="fw-normal">Profile</h3>
-                        </a>
-                    </div>
-                    <div class="col-6">
+                    <div class="col-12">
                         <a href="{{ route('viewStatuses') }}" class="btn btn-light text-black w-50"
                             style="background:#EAE2B7;">
                             <h3 class="fw-normal">Statuses</h3>
@@ -43,12 +38,14 @@
                     </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-6">
+                    <div class="col-12">
                         <a href="{{ route('viewCustomers') }}" class="btn btn-light w-50" style="background:#EAE2B7">
                             <h3 class="fw-normal">Customers</h3>
                         </a>
                     </div>
-                    <div class="col-6">
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
                         <a href="{{ route('viewPackages') }}" class="btn btn-light text-black w-50"
                             style="background:#EAE2B7;">
                             <h3 class="fw-normal">Package</h3>
@@ -68,12 +65,14 @@
                 </div>
             @else
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-12">
                         <a href="{{ route('login') }}" class="btn btn-light w-50" style="background:#EAE2B7">
                             <h3 class="fw-normal">Log in</h3>
                         </a>
                     </div>
-                    <div class="col-6">
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
                         <a href="{{ route('register') }}" class="btn btn-light text-black w-50" style="background:#EAE2B7;">
                             <h3 class="fw-normal">Register</h3>
                         </a>

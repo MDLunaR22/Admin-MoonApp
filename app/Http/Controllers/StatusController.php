@@ -43,7 +43,7 @@ class StatusController extends Controller
         $request ->validate([
             'name'=> 'required|min:3',
             'description'=> 'required|min:10',
-            'order'=> 'required|numeric',
+            // 'order'=> 'required|numeric',
         ]);
 
         $status = new Status();

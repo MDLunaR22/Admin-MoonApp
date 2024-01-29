@@ -5,12 +5,12 @@
         <div class="w-75 position-absolute top-50 start-50 translate-middle" style="max-height: 600px; overflow: auto;">
             <h1 class="mb-3">Update Package</h1>
             <div class="bg-white p-5 rounded-4">
-                <form action="{{ route('updatePackage', [$package->id]) }}" method="POST">
+                <form action="{{ route('updatePackage', [$packages->id]) }}" method="POST">
                     @method('PUT')
                     @csrf
                     <div class="mb-3">
                         <label for="tracking" class="form-label">Tracking</label>
-                        <input name="tracking" type="text" class="form-control" value="{{ $package->tracking }}">
+                        <input name="tracking" type="text" class="form-control" value="{{ $packages->tracking }}">
                     </div>
                     @error('tracking')
                         <h6 class="alert alert-danger">
@@ -19,7 +19,8 @@
                     @enderror
                     <div class="mb-3">
                         <label for="weight" class="form-label">Weight</label>
-                        <input type="number" class="form-control" name="weight" step="0.01" value="{{ $package->weight }}">
+                        <input type="number" class="form-control" name="weight" step="0.01"
+                            value="{{ $packages->weight }}">
                     </div>
                     @error('weight')
                         <h6 class="alert alert-danger">
@@ -28,7 +29,7 @@
                     @enderror
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <input type="text" class="form-control" name="description" value="{{ $package->description }}">
+                        <input type="text" class="form-control" name="description" value="{{ $packages->description }}">
                     </div>
                     @error('description')
                         <h6 class="alert alert-danger">
@@ -37,19 +38,14 @@
                     @enderror
                     <div class="mb-3">
                         <label for="status_id" class="form-label">Status_id</label>
-                        <select name="status_id" >
-                            <option value="">Seleccionar una opcion</option>
-                            @for ($i = 1; $i <= 5; $i++)
-                                @if ($package->status_id == $i)
-                                    <option value="{{ $i }}" selected>{{ $i }}</option>
-                                @else
-                                    <option value="{{ $i }}">{{ $i }}</option>
-                                @endif
-                                
-                            @endfor
+                        <select class="form-select" name="status_id">
+                            <option>Seleccione una opcion</option>
+                            @foreach ($statuses as $status)
+                                <option value="{{ $status->id }}"
+                                    {{ $packages->status->id == $status->id ? 'selected' : '' }}>{{ $status->name }}
+                                </option>
+                            @endforeach
                         </select>
-                        <input type="number" class="form-control" name="status_id" value="{{ $package->status_id }}">
-
                     </div>
                     @error('description')
                         <h6 class="alert alert-danger">
@@ -58,7 +54,14 @@
                     @enderror
                     <div class="mb-3">
                         <label for="customer_id" class="form-label">Customer_id</label>
-                        <input type="number" class="form-control" name="customer_id" value="{{ $package->customer_id }}">
+                        <select class="form-select" name="status_id">
+                            <option>Seleccione una opcion</option>
+                            @foreach ($customers as $customer)
+                                <option value="{{ $customer->id }}"
+                                    {{ $packages->customer->id == $customer->id ? 'selected' : '' }}>{{ $customer->name }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     @error('customer_id')
                         <h6 class="alert alert-danger">

@@ -24,7 +24,7 @@ Route::get('/', function () {
     $user = auth()->user();
     if ($user) {
         return view('moonApp', ['user' => $user]);
-    }else {
+    } else {
         return view('moonApp');
     }
 })->name('home');
@@ -33,10 +33,10 @@ Route::get('/', function () {
 
 Route::get('/app/add/status', fn() => view('moonApp.status.add'))->middleware('auth')->name('viewAddStatus');
 Route::get('/app/add/customer', fn() => view('moonApp.customer.add'))->middleware('auth')->name('viewAddCustomer');
-Route::get('/app/add/package', fn() => view('moonApp.package.add'))->middleware('auth')->name('viewAddPackage');
 
 Route::controller(PackageController::class)->middleware('auth')->group(function () {
     Route::get('/app/packages', 'index')->name('viewPackages');
+    Route::get('/app/view/package', 'create')->name('viewAddPackage');
     Route::post('/app/add/package', 'store')->name('addPackage');
     Route::get('/app/show/package/{id}', 'show')->name('showPackage');
     Route::put('/app/update/package/{id}', 'update')->name('updatePackage');
@@ -57,5 +57,9 @@ Route::controller(StatusController::class)->middleware('auth')->group(function (
     Route::get('/app/show/status/{id}', 'show')->name('showStatus');
     Route::put('/app/update/{id}', 'update')->name('updateStatus');
     Route::delete('/app/delete/status/{id}', 'destroy')->name('deleteStatus');
+});
+
+Route::fallback(function () {
+    return redirect('/');
 });
 

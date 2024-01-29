@@ -1,10 +1,10 @@
 @extends('app')
 @section('content')
-    <div class="container w-75 border mt-4 pt-4">
+    <div class="container w-75 mt-4 pt-4">
         <a href="{{ route('viewAddStatus') }}" class="btn btn-success">Add Status</a>
-        <div class="table-responsive bg-white p-5 mt-4 rounded-4 " style="max-height: 600px; overflow: auto;"">
-            <table class="table">
-                <thead>
+        <div class="table-responsive bg-white pb-5 ps-5 pe-5 mt-4 rounded-4" style="max-height: 600px; overflow: auto;">
+            <table class="table table-striped">
+                <thead class="thead-dark sticky-top">
                     <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Name</th>
@@ -13,8 +13,8 @@
                         <th scope="col">Options</th>
                     </tr>
                 </thead>
-                @foreach ($status as $status)
-                    <tbody>
+                <tbody>
+                    @foreach ($status as $status)
                         <tr>
                             <th scope="row">{{ $status->id }}</th>
                             <td>{{ $status->name }}</td>
@@ -29,7 +29,7 @@
                                 </form>
                             </td>
                         </tr>
-                @endforeach
+                    @endforeach
                 </tbody>
             </table>
         </div>

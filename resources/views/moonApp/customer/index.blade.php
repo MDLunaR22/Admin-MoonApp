@@ -1,11 +1,10 @@
 @extends('app')
 @section('content')
-    <div class="container w-75 border mt-4 pt-4">
-
-        <a href="{{ route('addCustomer') }}" class="btn btn-success">Add Customer</a>
-        <div class="table-responsive bg-white p-5 mt-4 rounded-4" style="max-height: 600px; overflow: auto;">
-            <table class="table">
-                <thead>
+    <div class="container w-75 mt-4 pt-4">
+        <a href="{{ route('viewAddCustomer') }}" class="btn btn-success">Add Customer</a>
+        <div class="table-responsive bg-white pb-5 ps-5 pe-5 mt-4 rounded-4" style="max-height: 600px; overflow: auto;">
+            <table class="table table-striped">
+                <thead class="thead-dark sticky-top">
                     <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Name</th>
@@ -16,8 +15,8 @@
                         <th scope="col">Options</th>
                     </tr>
                 </thead>
-                @foreach ($customer as $customer)
-                    <tbody>
+                <tbody>
+                    @foreach ($customer as $customer)
                         <tr>
                             <th scope="row">{{ $customer->id }}</th>
                             <td>{{ $customer->name }}</td>
@@ -32,7 +31,7 @@
                                 </form>
                             </td>
                         </tr>
-                @endforeach
+                    @endforeach
                 </tbody>
             </table>
         </div>

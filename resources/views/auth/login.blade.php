@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="mb-3 form-check">
-                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember')
+                    <input class="form-check-input" type="checkbox" name="remember" {{ old('remember')
                         ? 'checked' : '' }}>
                     <label class="form-check-label text-white" for="remember">
                         {{ __('Remember Me') }}

@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="position-absolute top-50 start-50 translate-middle w-75" style="max-height: 600px; overflow: auto;">
-            <h1 class="mb-3">Add Customer</h1>
+            <h1 class="mb-3">Add Package</h1>
             <div class="bg-white p-5 rounded-4">
                 <form action="{{ route('addPackage') }}" method="POST">
                     @csrf
@@ -35,8 +35,13 @@
                         </h6>
                     @enderror
                     <div class="mb-3">
-                        <label for="status_id" class="form-label">Status_id</label>
-                        <input type="number" class="form-control" name="status_id" value="{{old('status_id')}}">
+                        <label for="status_id" class="form-label">Status</label>
+                        <Select class="form-select" name="status_id">
+                            <option value="">Select an option</option>
+                            @foreach ($statuses as $status)
+                                <option value="{{ $status->id }}" @if (old('status_id') == $status->id) selected @endif>{{ $status->name }}</option>
+                            @endforeach
+                        </Select>
                     </div>
                     @error('status_id')
                         <h6 class="alert alert-danger">
@@ -44,8 +49,13 @@
                         </h6>
                     @enderror
                     <div class="mb-3">
-                        <label for="customer_id" class="form-label">Customer_id</label>
-                        <input type="number" class="form-control" name="customer_id" value="{{old('customer_id')}}">
+                        <label for="customer_id" class="form-label">Customer</label>
+                        <select class="form-select" name="customer_id">
+                            <option value="">Select an option</option>
+                            @foreach ($customers as $customer)
+                                <option value="{{ $customer->id }}" @if (old('customer_id') == $customer->id) selected @endif>{{ $customer->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     @error('customer_id')
                         <h6 class="alert alert-danger">
