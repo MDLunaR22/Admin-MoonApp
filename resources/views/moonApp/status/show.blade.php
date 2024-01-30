@@ -26,6 +26,15 @@
                             {{ $message }}
                         </h6>
                     @enderror
+                    <div class="mb-3">
+                        <label for="order" class="form-label">Order</label>
+                        <input type="text" class="form-control" name="order" required value="{{$status->order}}">
+                    </div>
+                    @error('order')
+                        <h6 class="alert alert-danger">
+                            {{ $message }}
+                        </h6>
+                    @enderror
                     <button type="submit" class="btn btn-primary">Update</button>
                     <a href="{{route('viewStatuses')}}" class="btn btn-secondary">Cancel</a>
                 </form>

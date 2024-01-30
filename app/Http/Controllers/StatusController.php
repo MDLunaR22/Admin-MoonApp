@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Package;
 use App\Models\Status;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Str;
@@ -22,8 +23,8 @@ class StatusController extends Controller
 
     public function index()
     {
-        $status = Status::all();
-        return view('moonApp.status.index', compact('status'));
+        $statuses = Status::all();
+        return view('moonApp.status.index', compact('statuses'));
     }
 
     /**
@@ -43,7 +44,7 @@ class StatusController extends Controller
         $request ->validate([
             'name'=> 'required|min:3',
             'description'=> 'required|min:10',
-            // 'order'=> 'required|numeric',
+            'order'=> 'required|numeric',
         ]);
 
         $status = new Status();
@@ -77,6 +78,12 @@ class StatusController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request ->validate([
+            'name'=> 'required|min:3',
+            'description'=> 'required|min:10',
+            'order'=> 'required|numeric',
+        ]);
+
         $status = Status::find($id);
         $status->name = $request->name;
         $status->description = $request->description;
@@ -91,9 +98,14 @@ class StatusController extends Controller
     public function destroy(string $id)
     {
         $status = Status::find($id);
+        $package = Package::where('status_id', $id)->get();
 
-        $status->delete();
+        if($package->isEmpty()){
+            return redirect()->route('viewStatuses')->with('error', 'Status cannot be deleted because it is in use');
+        }else{
+            $status->delete();
+            return redirect()->route('viewStatuses')->with('succes', 'Status deleted successfully');
+        }
 
-        return redirect()->route('viewStatuses');
     }
 }

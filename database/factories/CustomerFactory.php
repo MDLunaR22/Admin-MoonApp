@@ -23,7 +23,7 @@ class CustomerFactory extends Factory
         return [
             "name"=> $this->faker->name(),
             "surname"=> $this->faker->lastName(),
-            "code"=> $this->faker->text(5),
+            "code"=> $this->faker->unique()->bothify('???###'),
             "email"=> $this->faker->email(),
             "password"=> $this->faker->password(),
             "phone"=> $this->faker->phoneNumber(),

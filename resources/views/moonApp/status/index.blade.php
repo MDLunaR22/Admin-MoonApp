@@ -2,6 +2,14 @@
 @section('content')
     <div class="container w-75 mt-4 pt-4">
         <a href="{{ route('viewAddStatus') }}" class="btn btn-success">Add Status</a>
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+
         <div class="table-responsive bg-white pb-5 ps-5 pe-5 mt-4 rounded-4" style="max-height: 600px; overflow: auto;">
             <table class="table table-striped">
                 <thead class="thead-dark sticky-top">
@@ -14,7 +22,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($status as $status)
+                    @foreach ($statuses as $status)
                         <tr>
                             <th scope="row">{{ $status->id }}</th>
                             <td>{{ $status->name }}</td>
