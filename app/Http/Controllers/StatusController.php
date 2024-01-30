@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Package;
 use App\Models\Status;
 use Illuminate\Http\Request;
+
 // use Illuminate\Support\Str;
 
 class StatusController extends Controller
@@ -15,10 +16,10 @@ class StatusController extends Controller
 
     // public function validate(Request $request)
     // {
-        // $this->validate($request, [
-        //     'name' => 'required|unique:statuses|max:255',
-        //     'description' => 'required',
-        // ]);
+    // $this->validate($request, [
+    //     'name' => 'required|unique:statuses|max:255',
+    //     'description' => 'required',
+    // ]);
     // }
 
     public function index()
@@ -41,19 +42,21 @@ class StatusController extends Controller
     public function store(Request $request)
     {
 
-        $request ->validate([
-            'name'=> 'required|min:3',
-            'description'=> 'required|min:10',
-            'order'=> 'required|numeric',
+        $request->validate([
+            'name' => 'required|min:3',
+            'description' => 'required|min:10',
+            'order' => 'required|integer',
         ]);
 
         $status = new Status();
         $status->name = $request->name;
         $status->description = $request->description;
-        $status->order = 0;
+        if ($request->order != null) {
+            $status->order = $request->order;
+        }
         $status->save();
 
-        return redirect()->route('viewStatuses');
+        return redirect()->route('viewStatuses')->with('success', 'Status created successfully');
     }
 
     /**
@@ -78,18 +81,19 @@ class StatusController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request ->validate([
-            'name'=> 'required|min:3',
-            'description'=> 'required|min:10',
-            'order'=> 'required|numeric',
+        $request->validate([
+            'name' => 'required|min:3',
+            'description' => 'required|min:10',
+            'order' => 'required|integer',
         ]);
 
         $status = Status::find($id);
         $status->name = $request->name;
         $status->description = $request->description;
-        
+        $status->order = $request->order;
+
         $status->save();
-        return redirect()->route('viewStatuses');
+        return redirect()->route('viewStatuses')->with('success', 'Status updated successfully');
     }
 
     /**
@@ -100,11 +104,11 @@ class StatusController extends Controller
         $status = Status::find($id);
         $package = Package::where('status_id', $id)->get();
 
-        if($package->isEmpty()){
-            return redirect()->route('viewStatuses')->with('error', 'Status cannot be deleted because it is in use');
-        }else{
+        if ($package->isEmpty()) {
             $status->delete();
-            return redirect()->route('viewStatuses')->with('succes', 'Status deleted successfully');
+            return redirect()->route('viewStatuses')->with('success', 'Status deleted successfully');
+        } else {
+            return redirect()->route('viewStatuses')->with('error', 'Status cannot be deleted because it is in use');
         }
 
     }

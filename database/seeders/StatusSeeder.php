@@ -16,7 +16,7 @@ class StatusSeeder extends Seeder
     public function run(): void
     {
 
-        Status::factory(50)->create();
+        Status::factory(10)->create();
 
         // $status = new Status();
         // $status->name = 'Entregando...';

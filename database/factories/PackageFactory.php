@@ -20,7 +20,7 @@ class PackageFactory extends Factory
             "tracking"=> $this->faker->text(10),
             "weight"=> $this->faker->randomFloat(2, 1, 100),
             "description"=> $this->faker->paragraph(1),
-            "status_id"=> $this->faker->numberBetween(1, 50),
+            "status_id"=> $this->faker->numberBetween(1, 10),
             "customer_id"=> $this->faker->numberBetween(1, 10),
         ];
     }

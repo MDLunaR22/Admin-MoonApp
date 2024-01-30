@@ -3,7 +3,7 @@
     <div class="container">
 
         <div class="w-75 position-absolute top-50 start-50 translate-middle" style="max-height: 600px; overflow: auto;">
-            <h1 class="mb-3">Update Package</h1>
+            <h1 class="mb-3">Actualizar Paquete</h1>
             <div class="bg-white p-5 rounded-4">
                 <form action="{{ route('updatePackage', [$packages->id]) }}" method="POST">
                     @method('PUT')
@@ -18,7 +18,7 @@
                         </h6>
                     @enderror
                     <div class="mb-3">
-                        <label for="weight" class="form-label">Weight</label>
+                        <label for="weight" class="form-label">Peso</label>
                         <input type="number" class="form-control" name="weight" step="0.01"
                             value="{{ $packages->weight }}">
                     </div>
@@ -28,7 +28,7 @@
                         </h6>
                     @enderror
                     <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
+                        <label for="description" class="form-label">Descripcion</label>
                         <input type="text" class="form-control" name="description" value="{{ $packages->description }}">
                     </div>
                     @error('description')
@@ -37,7 +37,7 @@
                         </h6>
                     @enderror
                     <div class="mb-3">
-                        <label for="status_id" class="form-label">Status_id</label>
+                        <label for="status_id" class="form-label">Estado</label>
                         <select class="form-select" name="status_id">
                             <option>Seleccione una opcion</option>
                             @foreach ($statuses as $status)
@@ -53,7 +53,7 @@
                         </h6>
                     @enderror
                     <div class="mb-3">
-                        <label for="customer_id" class="form-label">Customer_id</label>
+                        <label for="customer_id" class="form-label">Cliente</label>
                         <select class="form-select" name="status_id">
                             <option>Seleccione una opcion</option>
                             @foreach ($customers as $customer)
@@ -68,8 +68,8 @@
                             {{ $message }}
                         </h6>
                     @enderror
-                    <button type="submit" class="btn btn-primary">Update</button>
-                    <a href="{{ route('viewPackages') }}" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <a href="{{ route('viewPackages') }}" class="btn btn-secondary">Cancelar</a>
                 </form>
             </div>
         </div>

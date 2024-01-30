@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="position-absolute top-50 start-50 translate-middle w-75" style="max-height: 600px; overflow: auto;">
-            <h1 class="mb-3">Add Package</h1>
+            <h1 class="mb-3">Agregar Paquete</h1>
             <div class="bg-white p-5 rounded-4">
                 <form action="{{ route('addPackage') }}" method="POST">
                     @csrf
@@ -16,7 +16,7 @@
                         </h6>
                     @enderror
                     <div class="mb-3">
-                        <label for="weight" class="form-label">Weight</label>
+                        <label for="weight" class="form-label">Peso</label>
                         <input type="number" step="0.01" class="form-control" name="weight" value="{{old('weight')}}">
                     </div>
                     @error('weight')
@@ -26,7 +26,7 @@
                     @enderror
 
                     <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
+                        <label for="description" class="form-label">Descripción</label>
                         <input type="text" class="form-control" name="description" value="{{old('description')}}">
                     </div>
                     @error('description')
@@ -35,9 +35,9 @@
                         </h6>
                     @enderror
                     <div class="mb-3">
-                        <label for="status_id" class="form-label">Status</label>
+                        <label for="status_id" class="form-label">Estado</label>
                         <Select class="form-select" name="status_id">
-                            <option value="">Select an option</option>
+                            <option value="">Selecciona una opción</option>
                             @foreach ($statuses as $status)
                                 <option value="{{ $status->id }}" @if (old('status_id') == $status->id) selected @endif>{{ $status->name }}</option>
                             @endforeach
@@ -49,9 +49,9 @@
                         </h6>
                     @enderror
                     <div class="mb-3">
-                        <label for="customer_id" class="form-label">Customer</label>
+                        <label for="customer_id" class="form-label">Cliente</label>
                         <select class="form-select" name="customer_id">
-                            <option value="">Select an option</option>
+                            <option value="">Seleccione una opción</option>
                             @foreach ($customers as $customer)
                                 <option value="{{ $customer->id }}" @if (old('customer_id') == $customer->id) selected @endif>{{ $customer->name }}</option>
                             @endforeach
@@ -62,8 +62,8 @@
                             {{ $message }}
                         </h6>
                     @enderror
-                    <button type="submit" class="btn btn-primary">Add</button>
-                    <a href="{{route('viewPackages')}}" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <a href="{{route('viewPackages')}}" class="btn btn-secondary">Cancear</a>
                 </form>
             </div>
         </div>

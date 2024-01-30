@@ -88,6 +88,10 @@ class PackageController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $package = Package::find($id);
+
+        $package->delete();
+
+        return redirect()->route('viewPackages')->with('success', 'Package deleted successfully');
     }
 }

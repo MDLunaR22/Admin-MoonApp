@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Package;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use Illuminate\Support\Str;
@@ -36,42 +37,50 @@ class CustomerController extends Controller
 
         $customer->save();
 
-        return redirect()->route('addCustomer')->with('succes', 'Customer created successfully');
+        return redirect()->route('viewCustomers')->with('success', 'Customer created successfully');
     }
 
     public function index()
     {
         $customers = Customer::all();
-        return view('moonApp.customer.index', ['customer' => $customers]);
+        return view('moonApp.customer.index', compact('customers'));
     }
 
     public function show($id){
         $customer = Customer::find($id);
-        return view('moonApp.customer.show', ['customer' => $customer]);
+        return view('moonApp.customer.show', compact('customer'));
     }
 
     public function update(Request $request, $id)
     {
         $request -> validate([
             'name' => 'required|min:3',
+            'surname'=> 'required|min:3',
+            'phone' => 'required|min:8',
         ]);
 
         $customer = Customer::find($id);
-        $customer -> name = $request->name;
-        $customer -> surname = $request->surname;
-        $customer -> phone = $request->phone;
+        $customer->name = $request->name;
+        $customer->surname = $request->surname;
+        $customer->phone = $request->phone;
         $customer->save();
 
         // return view('moonApp.index', ['succes' => 'Customer updated successfully']);
 
-        return redirect()->route('viewCustomers')->with('succes', 'Customer updated successfully');
+        return redirect()->route('viewCustomers')->with('success', 'Customer updated successfully');
     }
 
     public function destroy($id)
     {
         $customer = Customer::find($id);
-        $customer->delete();
+        $package = Package::where('customer_id', $id)->get();
+        
+        if($package->isEmpty()){
+            $customer->delete();
+            return redirect()->route('viewCustomers')->with('success', 'Customer deleted successfully');
+        }else{
+            return redirect()->route('viewCustomers')->with('error', 'Customer cannot be deleted because it is in use');
+        }
 
-        return redirect()->route('viewCustomers')->with('succes', 'Customer deleted successfully');
     }
 }
