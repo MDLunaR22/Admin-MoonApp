@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
     <div class="container w-75 mt-4 pt-4">
-        <a href="{{ route('viewAddStatus') }}" class="btn btn-success">Agregar Status</a>
+        <a href="{{ route('viewAddUsers') }}" class="btn btn-success">Agregar Usuario</a>
 
         @include('components.flash_alerts')
 
@@ -10,32 +10,30 @@
                 <thead class="thead-dark sticky-top">
                     <tr>
                         <th scope="col">Id</th>
-                        <th scope="col">Nombre del estado</th>
-                        <th scope="col">Descripcion</th>
-                        <th scope="col">Orden</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Email</th>
                         <th scope="col" colspan="2">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($statuses as $status)
+                    @foreach ($users as $user)
                         <tr>
-                            <th scope="row">{{ $status->id }}</th>
-                            <td>{{ $status->name }}</td>
-                            <td>{{ $status->description }}</td>
-                            <td>{{ $status->order }}</td>
+                            <th scope="row">{{ $user->id }}</th>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
                             <td>
-                                <a href="{{ route('showStatus', [$status->id]) }}" class="btn btn-warning">Editar</a>
+                                <a href="{{ route('showUser', [$user->id]) }}" class="btn btn-warning">Editar</a>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{$status->id}}">
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{$user->id}}">
                                     Eliminar
                                 </button>
-                                <div class="modal fade" id="exampleModal{{$status->id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{$status->id}}"
+                                <div class="modal fade" id="exampleModal{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{$user->id}}"
                                     aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel{{$status->id}}">Eliminar estado</h1>
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel{{$user->id}}">Eliminar Usuario</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
@@ -45,7 +43,7 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Cancelar</button>
-                                                <form action="{{ route('deleteStatus', [$status->id]) }}" method="POST">
+                                                <form action="{{ route('deleteUser', [$user->id]) }}" method="POST">
                                                     @method('DELETE')
                                                     @csrf
                                                     <button type="submit" class="btn btn-danger">Eliminar</button>

@@ -30,22 +30,22 @@
                     @enderror
                 </div>
 
-                <div class="mb-3 form-check">
+                {{-- <div class="mb-3 form-check">
                     <input class="form-check-input" type="checkbox" name="remember" {{ old('remember')
                         ? 'checked' : '' }}>
                     <label class="form-check-label text-white" for="remember">
                         {{ __('Remember Me') }}
                     </label>
-                </div>
+                </div> --}}
                 <button type="submit" class="w-100 mt-4 btn btn-primary">{{ __('Login') }}</button>
             </form>
             <a href="{{route('home')}}" class="w-100 mt-4 btn btn-secondary">{{ __('Cancel')
                 }}</a>
-            @if (Route::has('password.request'))
+            {{-- @if (Route::has('password.request'))
             <a class="w-100 btn btn-link mt-2 text-white" href="{{ route('password.request') }}">
                 {{ __('Forgot Your Password?') }}
             </a>
-            @endif
+            @endif --}}
             <a href="{{ route('register') }}" class="w-100 mt-2 btn btn-link text-white">{{ __('Not
                 have an account? Register') }}
             </a>

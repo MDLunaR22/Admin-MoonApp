@@ -15,12 +15,12 @@
         <div class="row">
             <div class="col-12">
                 <h1>@yield('title', 'MoonApp')</h1>
-                <h5 class="mt-3 mb-3">Welcome
+                <h5 class="mt-3 mb-3">¡Bienvenido
                     @if (Route::has('login'))
                         @auth
-                            {{ $user->name }}
+                            {{ $user->name }}!
                         @else
-                            {{ 'to MoonApp' }}
+                            {{ 'a MoonApp' }}!
                         @endauth
                     @endif
                 </h5>
@@ -29,26 +29,30 @@
 
         @if (Route::has('login'))
             @auth
-                <div class="row">
-                    <div class="col-12">
-                        <a href="{{ route('viewStatuses') }}" class="btn btn-light text-black w-50"
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <a href="{{ route('viewStatuses') }}" class="btn btn-light text-black w-75"
                             style="background:#EAE2B7;">
-                            <h3 class="fw-normal">Statuses</h3>
+                            <h3 class="fw-normal">Estados</h3>
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="{{ route('viewPackages') }}" class="btn btn-light text-black w-75"
+                            style="background:#EAE2B7;">
+                            <h3 class="fw-normal">Paquetes</h3>
                         </a>
                     </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-12">
-                        <a href="{{ route('viewCustomers') }}" class="btn btn-light w-50" style="background:#EAE2B7">
-                            <h3 class="fw-normal">Customers</h3>
+                    <div class="col-6">
+                        <a href="{{ route('viewCustomers') }}" class="btn btn-light w-75" style="background:#EAE2B7">
+                            <h3 class="fw-normal">Clientes</h3>
                         </a>
                     </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-12">
-                        <a href="{{ route('viewPackages') }}" class="btn btn-light text-black w-50"
+                    <div class="col-6">
+                        <a href="{{ route('viewUsers') }}" class="btn btn-light text-black w-75"
                             style="background:#EAE2B7;">
-                            <h3 class="fw-normal">Package</h3>
+                            <h3 class="fw-normal">Usuarios</h3>
                         </a>
                     </div>
                 </div>

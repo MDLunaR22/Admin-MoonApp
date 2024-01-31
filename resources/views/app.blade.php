@@ -30,7 +30,7 @@
                         <a class="nav-link {{Route::is('viewPackages') ? 'active' : ''}}" href="{{ route('viewPackages') }}">Packages</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{Route::is('viewUsers') ? 'active' : ''}}" href="{{ route('viewUsers') }}">Packages</a>
+                        <a class="nav-link {{Route::is('viewUsers') ? 'active' : ''}}" href="{{ route('viewUsers') }}">Users</a>
                     </li>
                 </ul>
                 @if (Route::has('login'))

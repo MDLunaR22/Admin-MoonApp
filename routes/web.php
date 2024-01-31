@@ -1,5 +1,6 @@
 <?php
 
+use App\Actions\Fortify\CreateNewUser;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\StatusController;
@@ -33,30 +34,38 @@ Route::get('/', function () {
 
 Route::get('/app/add/status', fn() => view('moonApp.status.add'))->middleware('auth')->name('viewAddStatus');
 Route::get('/app/add/customer', fn() => view('moonApp.customer.add'))->middleware('auth')->name('viewAddCustomer');
+Route::get('/app/add/users', fn() => view('moonApp.users.add'))->middleware('auth')->name('viewAddUsers');
 
 Route::controller(PackageController::class)->middleware('auth')->group(function () {
     Route::get('/app/packages', 'index')->name('viewPackages');
     Route::get('/app/view/package', 'create')->name('viewAddPackage');
-    Route::post('/app/add/package', 'store')->name('addPackage');
     Route::get('/app/show/package/{id}', 'show')->name('showPackage');
+    Route::post('/app/add/package', 'store')->name('addPackage');
     Route::put('/app/update/package/{id}', 'update')->name('updatePackage');
     Route::delete('/app/delete/package/{id}', 'destroy')->name('deletePackage');
 });
 
 Route::controller(CustomerController::class)->middleware('auth')->group(function () {
     Route::get('/app/customers', 'index')->name('viewCustomers');
-    Route::post('/app/add/customer', 'store')->name('addCustomer');
     Route::get('/app/show/customer/{id}', 'show')->name('showCustomer');
+    Route::post('/app/add/customer', 'store')->name('addCustomer');
     Route::put('/app/update/customer/{id}', 'update')->name('updateCustomer');
     Route::delete('/app/delete/customer/{id}', 'destroy')->name('deleteCustomer');
 });
 
 Route::controller(StatusController::class)->middleware('auth')->group(function () {
     Route::get('/app/statuses', 'index')->name('viewStatuses');
-    Route::post('/app/add/status', 'store')->name('addStatus');
     Route::get('/app/show/status/{id}', 'show')->name('showStatus');
+    Route::post('/app/add/status', 'store')->name('addStatus');
     Route::put('/app/update/{id}', 'update')->name('updateStatus');
     Route::delete('/app/delete/status/{id}', 'destroy')->name('deleteStatus');
+});
+
+Route::post('/app/add/user', [UserController::class, 'store'])->middleware('auth')->name('addUser');
+Route::controller(UserController::class)->middleware('auth')->group(function (){
+    Route::get('/app/users', 'index')->name('viewUsers');
+    Route::get('/app/show/user/{id}', 'show')->name('showUser');
+    Route::delete('/app/delete/user/{id}', 'destroy')->name('deleteUser');
 });
 
 Route::fallback(function () {

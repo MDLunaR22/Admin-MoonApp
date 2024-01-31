@@ -2,12 +2,12 @@
 @section('content')
     <div class="container">
         <div class="w-75 position-absolute top-50 start-50 translate-middle" style="max-height: 600px; overflow: auto;">
-            <h1 class="mb-3">Add Status</h1>
+            <h1 class="mb-3">Agregar estado</h1>
             <div class="bg-white p-5 rounded-4">
                 <form action="{{ route('addStatus') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name Status</label>
+                        <label for="name" class="form-label">Nombre del Estado</label>
                         <input name="name" type="text" class="form-control" value="{{ old('name') }}">
                     </div>
                     @error('name')

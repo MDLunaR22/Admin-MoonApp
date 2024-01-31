@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Package;
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class CustomerController extends Controller
@@ -32,7 +33,7 @@ class CustomerController extends Controller
         $customer -> surname = $request->surname;
         $customer -> code = Str::random(6);
         $customer -> email = $request->email;
-        $customer -> password = $request->password;
+        $customer -> password = Hash::make($request->password);
         $customer -> phone = $request->phone;
 
         $customer->save();
