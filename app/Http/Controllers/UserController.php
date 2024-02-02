@@ -41,22 +41,19 @@ class UserController extends Controller
         $user = new CreateNewUser();
         $password = Str::random(8);
         $user = $user->create([
-            'name'=> $request->name,
-            'email'=> $request->email,
-            'password'=> $password,
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $password,
             'password_confirmation' => $password,
         ]);
-
-        // dd($user)
-
-        // return Mail::to($request->email)->send(new WelcomeUserMail($user));
-
-        return (new WelcomeUserMail($user, $password));
+        
+        Mail::to($user->email)->send(new WelcomeUserMail($user, $password));
 
         // $user->name = $request->input('name');
         // $user->email = $request->input('email');
-        // $user->password = Str::random(6);        
-        // return redirect()->route('viewUsers')->with('success', 'Usuario creado correctamente');
+        // $user->password = Str::random(6);
+           
+        return redirect()->route('viewUsers')->with('success', 'Usuario creado correctamente');
     }
 
     /**
@@ -81,14 +78,28 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:3',
+            'email' => 'required|email',
+        ]);
+
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+
+        return redirect()->route('viewUsers')->with('success', 'User updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $user = User::find($id);
+
+        $user->delete();
+
+        return redirect()->route('viewUsers')-> with('success', 'User deleted succesfully');
     }
 }

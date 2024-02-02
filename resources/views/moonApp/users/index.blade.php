@@ -25,20 +25,22 @@
                                 <a href="{{ route('showUser', [$user->id]) }}" class="btn btn-warning">Editar</a>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{$user->id}}">
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal{{ $user->id }}">
                                     Eliminar
                                 </button>
-                                <div class="modal fade" id="exampleModal{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{$user->id}}"
-                                    aria-hidden="true">
+                                <div class="modal fade" id="exampleModal{{ $user->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel{{ $user->id }}" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel{{$user->id}}">Eliminar Usuario</h1>
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel{{ $user->id }}">
+                                                    Eliminar Usuario</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                ¿Estas seguro que quieres eliminar el status?
+                                                ¿Estas seguro que quieres eliminar el usuario?
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"

@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
     <div class="container w-75 mt-4 pt-4">
-        {{-- <a href="{{ route('viewAddCustomer') }}" class="btn btn-success">Add Customer</a> --}}
+        <a href="{{ route('viewAddCustomer') }}" class="btn btn-success">Add Customer</a>
         @include('components.flash_alerts')
         <div class="table-responsive bg-white pb-5 ps-5 pe-5 mt-4 rounded-4" style="max-height: 600px; overflow: auto;">
             <table class="table table-striped">
@@ -44,12 +44,12 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                ¿Estas seguro que quieres realizar esta accion?
+                                                ¿Estas seguro que quieres eliminar el cliente?
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Cancelar</button>
-                                                <form action="{{ route('deletePackage', [$customer->id]) }}" method="POST">
+                                                <form action="{{ route('deleteCustomer', [$customer->id]) }}" method="POST">
                                                     @method('DELETE')
                                                     @csrf
                                                     <button type="submit" class="btn btn-danger">Eliminar</button>

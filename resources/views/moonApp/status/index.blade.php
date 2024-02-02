@@ -40,7 +40,7 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                ¿Estas seguro que quieres eliminar el status?
+                                                ¿Estas seguro que quieres eliminar el estado?
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"

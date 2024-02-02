@@ -47,14 +47,14 @@
                             @endforeach
                         </select>
                     </div>
-                    @error('description')
+                    @error('status_id')
                         <h6 class="alert alert-danger">
                             {{ $message }}
                         </h6>
                     @enderror
                     <div class="mb-3">
                         <label for="customer_id" class="form-label">Cliente</label>
-                        <select class="form-select" name="status_id">
+                        <select class="form-select" name="customer_id">
                             <option>Seleccione una opcion</option>
                             @foreach ($customers as $customer)
                                 <option value="{{ $customer->id }}"

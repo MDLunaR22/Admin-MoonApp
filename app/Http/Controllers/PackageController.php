@@ -80,7 +80,25 @@ class PackageController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $package = Package::find($id);
+
+        $request->validate([
+            'tracking'=>'required|min:10',
+            'weight'=>'required|numeric',
+            'description'=>'required|min:5',
+            'status_id'=>'required|integer',
+            'customer_id'=>'required|integer'
+        ]);
+
+        $package->tracking = $request->tracking;
+        $package->weight = $request->weight;
+        $package->description = $request->description;
+        $package->status_id = $request->status_id;
+        $package->customer_id = $request->customer_id;
+        $package->save();
+
+        return redirect()->route('viewPackages');
+
     }
 
     /**

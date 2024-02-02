@@ -5,7 +5,7 @@
         <div class="w-75 position-absolute top-50 start-50 translate-middle" style="max-height: 600px; overflow: auto;">
             <h1 class="mb-3">Actualizar Usuario</h1>
             <div class="bg-white p-5 rounded-4">
-                <form action="{{ route('', [$user->id]) }}" method="POST">
+                <form action="{{ route('updateUsers', [$user->id]) }}" method="POST">
                     @method('PUT')
                     @csrf
                     <div class="mb-3">

@@ -57,14 +57,15 @@ Route::controller(StatusController::class)->middleware('auth')->group(function (
     Route::get('/app/statuses', 'index')->name('viewStatuses');
     Route::get('/app/show/status/{id}', 'show')->name('showStatus');
     Route::post('/app/add/status', 'store')->name('addStatus');
-    Route::put('/app/update/{id}', 'update')->name('updateStatus');
+    Route::put('/app/update/status/{id}', 'update')->name('updateStatus');
     Route::delete('/app/delete/status/{id}', 'destroy')->name('deleteStatus');
 });
 
-Route::post('/app/add/user', [UserController::class, 'store'])->middleware('auth')->name('addUser');
 Route::controller(UserController::class)->middleware('auth')->group(function (){
     Route::get('/app/users', 'index')->name('viewUsers');
     Route::get('/app/show/user/{id}', 'show')->name('showUser');
+    Route::post('/app/add/user', 'store')->name('addUser');
+    Route::put('/app/update/user/{id}', 'update')->name('updateUsers');
     Route::delete('/app/delete/user/{id}', 'destroy')->name('deleteUser');
 });
 

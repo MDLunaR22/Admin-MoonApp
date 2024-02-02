@@ -43,7 +43,7 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                ¿Estas seguro que quieres realizar esta accion?
+                                                ¿Estas seguro que quieres eliminar este paquete?
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
