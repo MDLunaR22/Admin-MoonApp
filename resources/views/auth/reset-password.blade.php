@@ -6,7 +6,6 @@
     <div class="container-fluid" style="height: 100vh; display: flex; align-items: center; justify-content: center;">
         <div class="card w-50 p-5 rounded-4" style="background-color: #003049;">
             <h1 class="text-white text-center">{{ __('Reset Password') }}</h1>
-            {{dd($request->query)}}
             <div class="card-body">
                 @if (session('status'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -16,7 +15,7 @@
                 @endif
                 <form method="POST" action="{{ route('password.update') }}">
                     @csrf
-                    <input type="hidden" name="token" value="{{ $token }}">
+                    <input type="hidden" name="token" value="{{ $request->route('token') }}">
                     <div class="mb-3">
                         <label for="email" class="form-label text-white">{{ __('Email') }}</label>
                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"

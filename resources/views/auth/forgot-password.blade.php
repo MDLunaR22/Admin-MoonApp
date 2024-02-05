@@ -8,10 +8,10 @@
                 <p class="text-white text-center">Enter your email address and we'll send you a link to reset your password.
                 </p>
                 @if (session('status'))
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    {{ session('status') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                  </div>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('status') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                 @endif
                 <form method="POST" action="{{ route('password.email') }}">
                     @csrf
@@ -24,7 +24,8 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                        <button type="submit" class="w-100 mt-4 btn btn-primary">{{ __('Send Password Reset Link') }}</button>
+                        <button type="submit"
+                            class="w-100 mt-4 btn btn-primary">{{ __('Send Password Reset Link') }}</button>
                     </div>
                     <a href="{{ route('login') }}"
                         class="w-100 mt-2 btn btn-link text-white">{{ __('Remembered your password? Login') }}</a>

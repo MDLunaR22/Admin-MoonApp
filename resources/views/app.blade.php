@@ -21,44 +21,26 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link {{(Route::is('viewStatuses') ? 'active' : '')}}" href="{{ route('viewStatuses') }}">Statuses</a>
+                        <a class="nav-link {{ Route::is('viewStatuses') ? 'active' : '' }}"
+                            href="{{ route('viewStatuses') }}">Statuses</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{(Route::is('viewCustomers') ? 'active' : '')}} " href="{{ route('viewCustomers') }}">Customers</a>
+                        <a class="nav-link {{ Route::is('viewCustomers') ? 'active' : '' }} "
+                            href="{{ route('viewCustomers') }}">Customers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{Route::is('viewPackages') ? 'active' : ''}}" href="{{ route('viewPackages') }}">Packages</a>
+                        <a class="nav-link {{ Route::is('viewPackages') ? 'active' : '' }}"
+                            href="{{ route('viewPackages') }}">Packages</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{Route::is('viewUsers') ? 'active' : ''}}" href="{{ route('viewUsers') }}">Users</a>
+                        <a class="nav-link {{ Route::is('viewUsers') ? 'active' : '' }}"
+                            href="{{ route('viewUsers') }}">Users</a>
                     </li>
                 </ul>
-                @if (Route::has('login'))
-                    @auth
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="nav-link">Log out</button>
-                        </form>
-                    @else
-                        <div class="btn-group" role="group">
-                            <a class="dropdown-toggle link-light" data-bs-toggle="dropdown" aria-expanded="false">
-                                Options
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <form class="dropdown-item" action="{{ route('login') }}">
-                                        <button type="submit" class="nav-link">Log in</button>
-                                    </form>
-                                </li>
-                                <li>
-                                    <form class="dropdown-item" action="{{ route('register') }}">
-                                        <button type="submit" class="nav-link">Register</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                    @endauth
-                @endif
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="nav-link">Log out</button>
+                </form>
             </div>
         </div>
     </nav>
