@@ -1,12 +1,14 @@
-<x-mail::message style="background-color: red;">
-# Welcome {{ $user->name }}
+<x-mail::message>
+# @lang('app.mail.welcome') {{ $name }}!
 
-Your password: {{ $password }}
+@lang('app.mail.your_password') *{{ $password }}*
 <br>
-Enter to our page
-<x-mail::button url="{{ config('app.url') }}">
-Log In
+<x-mail::panel>
+### @lang('app.mail.enter_our_site')
+<x-mail::button url="{{ config('app.url') }}" color="success">
+@lang('app.options.login')
 </x-mail::button>
+</x-mail::panel>
 
 <br>
 {{ config('app.name') }}

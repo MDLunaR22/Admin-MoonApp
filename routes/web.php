@@ -1,10 +1,14 @@
 <?php
 
-use App\Actions\Fortify\CreateNewUser;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\Localization;
+use App\Mail\WelcomeUserMail;
+use App\Models\User;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,7 +34,21 @@ Route::get('/', function () {
     }
 })->name('home');
 
-// Route::get('/app', [UserController::class, 'show'])->name('myInfo');
+Route::get('/mail', function() {
+    Mail::to('dluna@gmail.coom')->send(new WelcomeUserMail('David', '12345678'));
+})->name('mail');
+
+Route::get('/lang/{locale}', function (string $locale) {
+    if (! in_array($locale, ['en', 'es'])) {
+        abort(400);
+    }
+
+    App::setLocale($locale);
+
+    session()->put('locale', $locale);
+
+    return redirect()->back();
+})->name('lang');
 
 Route::get('/app/add/status', fn() => view('moonApp.status.add'))->middleware('auth')->name('viewAddStatus');
 Route::get('/app/add/customer', fn() => view('moonApp.customer.add'))->middleware('auth')->name('viewAddCustomer');
@@ -38,7 +56,7 @@ Route::get('/app/add/users', fn() => view('moonApp.users.add'))->middleware('aut
 
 Route::controller(PackageController::class)->middleware('auth')->group(function () {
     Route::get('/app/packages', 'index')->name('viewPackages');
-    Route::get('/app/view/package', 'create')->name('viewAddPackage');
+    Route::get('/app/add/package', 'create')->name('viewAddPackage');
     Route::get('/app/show/package/{id}', 'show')->name('showPackage');
     Route::post('/app/add/package', 'store')->name('addPackage');
     Route::put('/app/update/package/{id}', 'update')->name('updatePackage');
