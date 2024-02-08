@@ -34,10 +34,6 @@ Route::get('/', function () {
     }
 })->name('home');
 
-Route::get('/mail', function() {
-    Mail::to('dluna@gmail.coom')->send(new WelcomeUserMail('David', '12345678'));
-})->name('mail');
-
 Route::get('/lang/{locale}', function (string $locale) {
     if (! in_array($locale, ['en', 'es'])) {
         abort(400);

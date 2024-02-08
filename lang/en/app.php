@@ -58,6 +58,7 @@ return [
         "customer" => "Customer",
         "order" => "Order",
         "select_option" => "Select an option",
+        "show_pass" => "Show Password",
     ],
     "options" => [
         "create" => "Create",

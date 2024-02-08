@@ -58,6 +58,7 @@ return [
         "status" => "Estado",
         "customer" => "Cliente",
         "order" => "Orden",
+        "show_pass" => "Mostrar Contraseña",
     ],
     "options" => [
         "create" => "Crear",

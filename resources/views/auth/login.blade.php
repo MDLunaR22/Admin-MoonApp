@@ -27,8 +27,23 @@
 
                     <div class="mb-3">
                         <label for="password" class="form-label text-white">@lang('app.inputs.password')</label>
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
-                            name="password" required autocomplete="current-password">
+                        <input type="password" id="password" name="password" class="form-control">
+                        <br>
+                        <label for="mostrar_contraseña" class="form-check-label text-white">@lang('app.inputs.show_pass')</label>
+                        <input type="checkbox" id="mostrar_contraseña" class="form-check-input" onclick="mostrarContraseña()">
+
+                        <script>
+                            function mostrarContraseña() {
+                                var contraseñaInput = document.getElementById("password");
+                                if (contraseñaInput.type === "password") {
+                                    contraseñaInput.type = "text";
+                                } else {
+                                    contraseñaInput.type = "password";
+                                }
+                            }
+                        </script>
+
+
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
