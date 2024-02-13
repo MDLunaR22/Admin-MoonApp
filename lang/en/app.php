@@ -35,6 +35,17 @@ return [
             "show" => "Show User",
             "delete" => "Delete User",
         ],
+        "role" => [
+            "title" => "Roles",
+            "index" => "Roles",
+            "create" => "Create Role",
+            "edit" => "Edit Role",
+            "show" => "Show Role",
+            "delete" => "Delete Role",
+        ],
+        "assign_permissions_role" => [
+            "title" => "Assign Permissions to Role",
+        ],
         "login" => "Login",
         "logout" => "Logout",
         "register" => "Register",
@@ -44,6 +55,7 @@ return [
     "inputs" => [
         "name" => "Name",
         "status_name" => "Status Name",
+        "role_name" => "Role Name",
         "surname" => "Surname",
         "email" => "Email",
         "phone" => "Phone Number",
@@ -59,6 +71,7 @@ return [
         "order" => "Order",
         "select_option" => "Select an option",
         "show_pass" => "Show Password",
+        "permission" => "Permissions",
     ],
     "options" => [
         "create" => "Create",
@@ -76,7 +89,6 @@ return [
         "remember_password" => "Remembered your password? Login",
         "forgot_password" => "Send Password Reset Link",
         "reset"=> "Reset",
-
     ],
     "messages" => [
         "welcome_login" => "Welcome back",

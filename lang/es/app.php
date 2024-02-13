@@ -35,6 +35,17 @@ return [
             "show" => "Mostrar Usuario",
             "delete" => "Eliminar Usuario",
         ],
+        "role" => [
+            "title" => "Roles",
+            "index" => "Roles",
+            "create" => "Crear Rol",
+            "edit" => "Editar Rol",
+            "show" => "Mostrar Rol",
+            "delete" => "Eliminar Rol",
+        ],
+        "assign_permissions_role" => [
+            "title" => "Asignar Permisos a Rol",
+        ],
         "login" => "Iniciar Sesión",
         "logout" => "Cerrar Sesión",
         "register" => "Registrarse",
@@ -45,6 +56,7 @@ return [
         "select_option"=> "Selecciona una opción",
         "name" => "Nombre",
         "status_name" => "Nombre del Estado",
+        "role_name" => "Nombre del Rol",
         "surname" => "Apellido",
         "email" => "Correo Electrónico",
         "phone" => "Número de Teléfono",
@@ -59,6 +71,7 @@ return [
         "customer" => "Cliente",
         "order" => "Orden",
         "show_pass" => "Mostrar Contraseña",
+        "permission" => "Permisos",
     ],
     "options" => [
         "create" => "Crear",
