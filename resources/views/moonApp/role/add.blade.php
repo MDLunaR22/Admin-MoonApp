@@ -15,6 +15,18 @@
                             {{ $message }}
                         </h6>
                     @enderror
+
+                    <label for="permissions[]">@lang('app.inputs.permission')</label>
+                    <select class="js-example-basic-multiple w-100 " name="permissions[]" multiple="multiple">
+                        @foreach ($permissions as $permission)
+                            <option value="{{ $permission->name }}">{{ $permission->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('permissions[]')
+                        <h6 class="alert alert-danger">
+                            {{ $message }}
+                        </h6>
+                    @enderror
                     <button type="submit" class="btn btn-primary">@lang('app.options.save')</button>
                     <a href="{{ route('viewRoles') }}" class="btn btn-secondary">@lang('app.options.cancel')</a>
                 </form>

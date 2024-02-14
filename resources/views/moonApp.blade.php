@@ -30,31 +30,39 @@
         @if (Route::has('login'))
             @auth
                 <div class="row mt-4">
-                    <div class="col-6">
-                        <a href="{{ route('viewStatuses') }}" class="btn btn-light text-black w-75"
-                            style="background:#EAE2B7;">
-                            <h3 class="fw-normal">@lang('app.rutes.status.title')</h3>
-                        </a>
-                    </div>
-                    <div class="col-6">
-                        <a href="{{ route('viewPackages') }}" class="btn btn-light text-black w-75"
-                            style="background:#EAE2B7;">
-                            <h3 class="fw-normal">@lang('app.rutes.package.title')</h3>
-                        </a>
-                    </div>
+                    @can('package_view')
+                        <div class="col-6">
+                            <a href="{{ route('viewPackages') }}" class="btn btn-light text-black w-75"
+                                style="background:#EAE2B7;">
+                                <h3 class="fw-normal">@lang('app.rutes.package.title')</h3>
+                            </a>
+                        </div>
+                    @endcan
+                    @can('status_view')
+                        <div class="col-6">
+                            <a href="{{ route('viewStatuses') }}" class="btn btn-light text-black w-75"
+                                style="background:#EAE2B7;">
+                                <h3 class="fw-normal">@lang('app.rutes.status.title')</h3>
+                            </a>
+                        </div>
+                    @endcan
                 </div>
                 <div class="row mt-4">
-                    <div class="col-6">
-                        <a href="{{ route('viewCustomers') }}" class="btn btn-light w-75" style="background:#EAE2B7">
-                            <h3 class="fw-normal">@lang('app.rutes.customer.title')</h3>
-                        </a>
-                    </div>
-                    <div class="col-6">
-                        <a href="{{ route('viewUsers') }}" class="btn btn-light text-black w-75"
-                            style="background:#EAE2B7;">
-                            <h3 class="fw-normal">@lang('app.rutes.user.title')</h3>
-                        </a>
-                    </div>
+                    @can('customer_view')
+                        <div class="col-6">
+                            <a href="{{ route('viewCustomers') }}" class="btn btn-light w-75" style="background:#EAE2B7">
+                                <h3 class="fw-normal">@lang('app.rutes.customer.title')</h3>
+                            </a>
+                        </div>
+                    @endcan
+                    @can('user_view')
+                        <div class="col-6">
+                            <a href="{{ route('viewUsers') }}" class="btn btn-light text-black w-75"
+                                style="background:#EAE2B7;">
+                                <h3 class="fw-normal">@lang('app.rutes.user.title')</h3>
+                            </a>
+                        </div>
+                    @endcan
                 </div>
                 <div class="row mt-4">
                     <div class="col-12">

@@ -47,6 +47,7 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             "name" => "required|min:3",
+            "permissions" => "array",
         ]);
         $role = Role::where('name', $request->name)->where('guard_name', 'web')->first();
 
@@ -54,6 +55,8 @@ class RoleController extends Controller
             return redirect()->route('viewAddRole')->withErrors(['name' => __('app.exist.role')]);
         }
         $role = Role::create(['name' => $request->name, 'guard_name' => 'web']);
+        $role->syncPermissions($request->permissions);
+        return redirect()->route("viewRoles")->with("success", __("app.messages.success_added"));
     }
 
     /**
@@ -62,9 +65,10 @@ class RoleController extends Controller
     public function show(string $id)
     {
         $role = Role::findById($id);
+        $roleHasPermissions = $role->permissions->pluck('id')->toArray();
         $permissions = Permission::all();
 
-        return view('moonApp.role.show', compact('role', 'permissions'));
+        return view('moonApp.role.show', compact('role', 'permissions', 'roleHasPermissions'));
     }
 
     /**
@@ -80,7 +84,19 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $this->validate($request, [
+            "name" => "required|min:3",
+            "permissions" => "array",
+        ]);
+        $role = Role::find($id);
+        $role->name = $request->name;
+        $role->save();
+
+        if (is_array($request->permissions)) {
+            $role->syncPermissions($request->permissions);
+        }
+        return redirect()->route("viewRoles")->with("success", __("app.messages.success_updated"));
     }
 
     /**
@@ -88,6 +104,12 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $role = Role::find($id);
+        if ($role->name == "super-admin") {
+            return redirect()->route("viewRoles")->with("error", __("app.messages.error_deleted_role"));
+        } else {
+            $role->delete();
+            return redirect()->route("viewRoles")->with("success", __("app.messages.success_deleted"));
+        }
     }
 }

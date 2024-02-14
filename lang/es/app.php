@@ -96,6 +96,11 @@ return [
         "login" => "Inicia sesión en tu cuenta",
         "delete_message" => "¿Estás seguro de que quieres eliminar este registro? Esta acción no se puede deshacer.",
         "forgot_password" => "Ingrese su dirección de correo electrónico y le enviaremos un enlace para restablecer su contraseña.",
+        "succes_added" => "¡Agregado correctamente!",
+        "succes_updated" => "¡Actualizado correctamente!",
+        "succes_deleted" => "¡Eliminado correctamente!",
+        "error_is_in_use"=> " está en uso y no se puede eliminar",
+        "error_deleted_role" => "No se puede eliminar el rol super-admin",
     ],
     "language" => [
         "title"=> "Idioma",

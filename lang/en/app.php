@@ -96,6 +96,11 @@ return [
         "login" => "Log In to your account",
         "delete_message"=> "Are you sure you want to delete this record? This action can not be undone.",
         "forgot_password" => "Enter your email address and we'll send you a link to reset your password.",
+        "success_added" => "Record added successfully!",
+        "success_updated" => "Record updated successfully!",
+        "success_deleted" => "Record deleted successfully!",
+        "error_is_in_use"=> " is in use and can not be deleted",
+        "error_deleted_role"=> "Super admin can not be deleted",
     ],
     "language"=> [
         "title"=> "Language",

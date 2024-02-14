@@ -5,11 +5,8 @@ use App\Http\Controllers\PackageController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\UserController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
-use Spatie\Permission\Models\Permission;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,9 +40,9 @@ Route::get('/lang/{locale}', function (string $locale) {
     return redirect()->back();
 })->name('lang');
 
-Route::get('/app/add/status', fn() => view('moonApp.status.add'))->middleware('auth')->name('viewAddStatus');
-Route::get('/app/add/customer', fn() => view('moonApp.customer.add'))->middleware('auth')->name('viewAddCustomer');
-Route::get('/app/add/users', fn() => view('moonApp.users.add'))->middleware('auth')->name('viewAddUsers');
+Route::get('/app/add/status', fn() => view('moonApp.status.add'))->middleware(['auth', 'check.rol:user'])->name('viewAddStatus');
+Route::get('/app/add/customer', fn() => view('moonApp.customer.add'))->middleware(['auth', 'check.rol:user'])->name('viewAddCustomer');
+Route::get('/app/add/users', fn() => view('moonApp.users.add'))->middleware(['auth', 'check.rol:user'])->name('viewAddUsers');
 
 Route::controller(PackageController::class)->middleware('auth')->group(function () {
     Route::get('/app/packages', 'index')->name('viewPackages');
@@ -56,7 +53,7 @@ Route::controller(PackageController::class)->middleware('auth')->group(function 
     Route::delete('/app/delete/package/{id}', 'destroy')->name('deletePackage');
 });
 
-Route::controller(CustomerController::class)->middleware('auth')->group(function () {
+Route::controller(CustomerController::class)->middleware(['auth'])->group(function () {
     Route::get('/app/customers', 'index')->name('viewCustomers');
     Route::get('/app/show/customer/{id}', 'show')->name('showCustomer');
     Route::post('/app/add/customer', 'store')->name('addCustomer');
@@ -64,7 +61,7 @@ Route::controller(CustomerController::class)->middleware('auth')->group(function
     Route::delete('/app/delete/customer/{id}', 'destroy')->name('deleteCustomer');
 });
 
-Route::controller(StatusController::class)->middleware('auth')->group(function () {
+Route::controller(StatusController::class)->middleware(['auth', 'check.rol:user'])->group(function () {
     Route::get('/app/statuses', 'index')->name('viewStatuses');
     Route::get('/app/show/status/{id}', 'show')->name('showStatus');
     Route::post('/app/add/status', 'store')->name('addStatus');
@@ -72,7 +69,7 @@ Route::controller(StatusController::class)->middleware('auth')->group(function (
     Route::delete('/app/delete/status/{id}', 'destroy')->name('deleteStatus');
 });
 
-Route::controller(UserController::class)->middleware('auth')->group(function () {
+Route::controller(UserController::class)->middleware(['auth', 'check.rol:user'])->group(function () {
     Route::get('/app/users', 'index')->name('viewUsers');
     Route::get('/app/show/user/{id}', 'show')->name('showUser');
     Route::post('/app/add/user', 'store')->name('addUser');
@@ -80,7 +77,7 @@ Route::controller(UserController::class)->middleware('auth')->group(function () 
     Route::delete('/app/delete/user/{id}', 'destroy')->name('deleteUser');
 });
 
-Route::controller(RoleController::class)->middleware('auth')->group(function () {
+Route::controller(RoleController::class)->middleware(['auth', 'check.rol:user'])->group(function () {
     Route::get('/app/roles', 'index')->name('viewRoles');
     Route::get('app/add/role', 'create')->name('viewAddRole');
     Route::get('/app/show/role/{id}', 'show')->name('showRole');
