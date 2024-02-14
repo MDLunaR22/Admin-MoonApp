@@ -20,14 +20,22 @@ class PermissionSeeder extends Seeder
 
         $role = Role::create(['name' => 'admin']);
         // or may be done by chaining
-        $role = Role::create(['name' => 'creator']);
+        $role = Role::create(['name' => 'user']);
 
         $role = Role::create(['name' => 'super-admin']);
 
+        $permissions = [
+            'user' => ['user_view', 'user_create', 'user_edit', 'user_delete'],
+            'package' => ['package_view', 'package_create', 'package_edit', 'package_delete'],
+            'status' => ['status_view', 'status_create', 'status_edit', 'status_delete'],
+            'customer' => ['customer_view', 'customer_create', 'customer_edit', 'customer_delete'],
+            'role' => ['role_view', 'role_create', 'role_edit', 'role_delete'],
+        ];
+
         $permissionsByRole = [
-            'super-admin' => ['all'],
-            'admin' => ['edit', 'create', 'view'],
-            'creator' => ['create', 'view'],
+            'super-admin' => array_merge($permissions['user'], $permissions['package'], $permissions['status'], $permissions['customer'], $permissions['role']),
+            'admin' => array_merge([$permissions['package'][0], $permissions['package'][1], $permissions['package'][2]], [$permissions['status'][0], $permissions['status'][1], $permissions['status'][2]], [$permissions['customer'][0], $permissions['customer'][1], $permissions['customer'][2]]),
+            'user' => array_merge([$permissions['package'][0]], [$permissions['customer'][0], $permissions['customer'][1]]),
         ];
 
         $insertPermissions = fn($role) => collect($permissionsByRole[$role])
@@ -39,7 +47,6 @@ class PermissionSeeder extends Seeder
 
                 if ($existingPermission) {
                     return $existingPermission->id;
-
                 }
                 return DB::table('permissions')->insertGetId(['name' => $name, 'guard_name' => 'web']);
             })
@@ -48,7 +55,7 @@ class PermissionSeeder extends Seeder
         $permissionIdsByRole = [
             'super-admin' => $insertPermissions('super-admin'),
             'admin' => $insertPermissions('admin'),
-            'creator' => $insertPermissions('creator')
+            'user' => $insertPermissions('user')
         ];
 
         foreach ($permissionIdsByRole as $role => $permissionIds) {
