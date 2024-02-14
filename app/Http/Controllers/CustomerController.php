@@ -38,7 +38,7 @@ class CustomerController extends Controller
 
         $customer->save();
 
-        return redirect()->route('viewCustomers')->with('success', 'Customer created successfully');
+        return redirect()->route('viewCustomers')->with('success',__('app.messages.success_added'));
     }
 
     public function index()
@@ -68,7 +68,7 @@ class CustomerController extends Controller
 
         // return view('moonApp.index', ['succes' => 'Customer updated successfully']);
 
-        return redirect()->route('viewCustomers')->with('success', 'Customer updated successfully');
+        return redirect()->route('viewCustomers')->with('success', __('app.messages.success_updated'));
     }
 
     public function destroy($id)
@@ -78,9 +78,9 @@ class CustomerController extends Controller
         
         if($package->isEmpty()){
             $customer->delete();
-            return redirect()->route('viewCustomers')->with('success', 'Customer deleted successfully');
+            return redirect()->route('viewCustomers')->with('success', __('app.messages.success_deleted'));
         }else{
-            return redirect()->route('viewCustomers')->with('error', 'Customer cannot be deleted because it is in use');
+            return redirect()->route('viewCustomers')->with('error', "{$customer->name}" . __('app.messages.error_is_in_use'));
         }
 
     }

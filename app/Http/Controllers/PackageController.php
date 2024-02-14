@@ -15,8 +15,8 @@ class PackageController extends Controller
 
     public function index()
     {
-        $package = Package::all();
-        return view('moonApp.package.index', ['packages' => $package]);
+        $packages = Package::all();
+        return view('moonApp.package.index', compact('packages'));
     }
 
     /**
@@ -27,7 +27,7 @@ class PackageController extends Controller
         $customers = Customer::all();
         $statuses = Status::all();
 
-        return view('moonApp.package.add', ['customers' => $customers, 'statuses' => $statuses]);
+        return view('moonApp.package.add', compact('customers', 'statuses'));
     }
 
     /**
@@ -36,11 +36,11 @@ class PackageController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'tracking'=> 'required|min:10',
-            'weight'=> 'required|numeric',
-            'description'=> 'required|min:7',
-            'status_id'=> 'required|numeric',
-            'customer_id'=> 'required|numeric',
+            'tracking'=> ['required', 'min:10'],
+            'weight'=> ['required', 'numeric'],
+            'description'=> ['required', 'string', 'min:7', 'max:255'],
+            'status_id'=> ['required','numeric', 'exists:statuses,id'],
+            'customer_id'=> ['required','numeric', 'exists:customers,id'],
         ]);
 
         $package = new Package();
@@ -52,7 +52,7 @@ class PackageController extends Controller
 
         $package->save();
 
-        return redirect()->route('viewPackages');
+        return redirect()->route('viewPackages')->with('success', __('app.messages.success_added'));
     }
 
     /**
@@ -60,11 +60,11 @@ class PackageController extends Controller
      */
     public function show(string $id)
     {
-        $package = Package::find($id);
-        $status = Status::all();
-        $customer = Customer::all();
+        $packages = Package::find($id);
+        $statuses = Status::all();
+        $customers = Customer::all();
 
-        return view('moonApp.package.show', ['packages' => $package, 'statuses' => $status, 'customers' => $customer]);
+        return view('moonApp.package.show', compact('packages', 'statuses', 'customers'));
     }
 
     /**
@@ -82,12 +82,12 @@ class PackageController extends Controller
     {
         $package = Package::find($id);
 
-        $request->validate([
-            'tracking'=>'required|min:10',
-            'weight'=>'required|numeric',
-            'description'=>'required|min:5',
-            'status_id'=>'required|integer',
-            'customer_id'=>'required|integer'
+        $this->validate($request, [
+            'tracking'=> ['required', 'min:10'],
+            'weight'=> ['required', 'numeric'],
+            'description'=> ['required', 'string', 'min:7', 'max:255'],
+            'status_id'=> ['required','numeric', 'exists:statuses,id'],
+            'customer_id'=> ['required','numeric', 'exists:customers,id'],
         ]);
 
         $package->tracking = $request->tracking;
@@ -97,7 +97,7 @@ class PackageController extends Controller
         $package->customer_id = $request->customer_id;
         $package->save();
 
-        return redirect()->route('viewPackages');
+        return redirect()->route('viewPackages')->with('success', __('app.messages.success_updated'));
 
     }
 
@@ -110,6 +110,6 @@ class PackageController extends Controller
 
         $package->delete();
 
-        return redirect()->route('viewPackages')->with('success', 'Package deleted successfully');
+        return redirect()->route('viewPackages')->with('success', __('app.messages.success_deleted'));
     }
 }

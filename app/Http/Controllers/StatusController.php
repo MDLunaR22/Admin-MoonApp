@@ -43,20 +43,21 @@ class StatusController extends Controller
     {
 
         $request->validate([
-            'name' => 'required|min:3',
-            'description' => 'required|min:10',
-            'order' => 'required|integer',
+            'name' => ['required', 'min:3', 'unique:status,name'],
+            'description' => ['required','min:10'],
+            'order' => ['required','integer'],
         ]);
 
         $status = new Status();
+        $stauses = Status::all()->count();
         $status->name = $request->name;
         $status->description = $request->description;
         if ($request->order != null) {
-            $status->order = $request->order;
+            $status->order = $stauses + 1;
         }
         $status->save();
 
-        return redirect()->route('viewStatuses')->with('success', 'Status created successfully');
+        return redirect()->route('viewStatuses')->with('success', __('app.messages.success_added'));
     }
 
     /**
@@ -93,7 +94,7 @@ class StatusController extends Controller
         $status->order = $request->order;
 
         $status->save();
-        return redirect()->route('viewStatuses')->with('success', 'Status updated successfully');
+        return redirect()->route('viewStatuses')->with('success', __('app.messages.success_updated'));
     }
 
     /**
@@ -106,9 +107,9 @@ class StatusController extends Controller
 
         if ($package->isEmpty()) {
             $status->delete();
-            return redirect()->route('viewStatuses')->with('success', 'Status deleted successfully');
+            return redirect()->route('viewStatuses')->with('success', __('app.messages.success_deleted'));
         } else {
-            return redirect()->route('viewStatuses')->with('error', 'Status cannot be deleted because it is in use');
+            return redirect()->route('viewStatuses')->with('error', `$package->id` . __('app.messages.error_deleted'));
         }
 
     }

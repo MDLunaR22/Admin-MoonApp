@@ -8,36 +8,28 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $users = User::all();
         return view('moonApp.users.index', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|min:3',
-            'email' => 'required|email',
+            'name' => ['required', 'min:3'],
+            'email' => ['required','email','unique:users,email'],
+            'role' => ['required', 'string', 'exists:roles,name'],
         ]);
-
         $user = new CreateNewUser();
         $password = Str::random(8);
         $user = $user->create([
@@ -46,60 +38,48 @@ class UserController extends Controller
             'password' => $password,
             'password_confirmation' => $password,
         ]);
-        
+
         Mail::to($user->email)->send(new WelcomeUserMail($user, $password));
-
-        // $user->name = $request->input('name');
-        // $user->email = $request->input('email');
-        // $user->password = Str::random(6);
-           
-        return redirect()->route('viewUsers')->with('success', 'Usuario creado correctamente');
+        return redirect()->route('viewUsers')->with('success', __('app.messages.success_added'));
     }
-
-    /**
-     * Display the specified resource.
-     */
+    
     public function show($id)
     {
         $user = User::find($id);
-        return view("moonApp.users.show", ['user' => $user]);
+        $roles = Role::all();
+        return view("moonApp.users.show", compact('user', 'roles'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit(string $id)
     {
         //
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name' => 'required|min:3',
-            'email' => 'required|email',
+            'name' => ['required','min:3'],
+            'email' => ['required','email', 'unique:users,email,'],
+            'role' => ['required','exists:roles,name'],
         ]);
 
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->syncRoles($request->role);
         $user->save();
 
-        return redirect()->route('viewUsers')->with('success', 'User updated successfully');
+        return redirect()->route('viewUsers')->with('success', __('app.messages.success_updated'));
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy($id)
     {
         $user = User::find($id);
-
-        $user->delete();
-
-        return redirect()->route('viewUsers')-> with('success', 'User deleted succesfully');
+        if($user->getRoleNames()->first() == 'super-admin'){
+            return redirect()->route('viewUsers')->with('error', __('app.messages.error_deleted_role'));
+        }else{
+            $user->delete();
+            return redirect()->route('viewUsers')->with('success', __('app.messages.success_deleted'));
+        }
     }
 }

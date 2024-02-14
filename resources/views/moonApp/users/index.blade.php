@@ -12,6 +12,7 @@
                         <th scope="col">Id</th>
                         <th scope="col">@lang('app.inputs.name')</th>
                         <th scope="col">@lang('app.inputs.email')</th>
+                        <th scope="col">@lang('app.inputs.role')</th>
                         <th scope="col" colspan="2">@lang('app.inputs.options')</th>
                     </tr>
                 </thead>
@@ -21,6 +22,11 @@
                             <th scope="row">{{ $user->id }}</th>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
+                            <td>
+                                @foreach ($user->roles as $rol)
+                                    {{ $rol->name }}
+                                @endforeach
+                            </td>
                             <td>
                                 @can('user_edit')
                                     <a href="{{ route('showUser', [$user->id]) }}" class="btn btn-warning">@lang('app.options.edit')</a>

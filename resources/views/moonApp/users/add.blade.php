@@ -24,6 +24,18 @@
                             {{ $message }}
                         </h6>
                     @enderror
+                    <label for="role" class="form-label">@lang('app.inputs.role')</label>
+                    <select class="w-100 form-control mb-3" name="role">
+                        <option disabled selected >@lang('app.inputs.select_option')</option>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->name }}">{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('role')
+                        <h6 class="alert alert-danger">
+                            {{ $message }}
+                        </h6>
+                    @enderror
                     <button type="submit" class="btn btn-primary">@lang('app.options.save')</button>
                     <a href="{{ route('viewUsers') }}" class="btn btn-secondary">@lang('app.options.cancel')</a>
                 </form>
