@@ -107,4 +107,7 @@ return [
         "your_password" => "Tu contraseña es:",
         "enter_our_site" => "Ingresa a nuestro sitio",
     ],
+    'exist' => [
+        'role' => 'El rol ya existe',
+    ]
 ];

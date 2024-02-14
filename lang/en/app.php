@@ -106,5 +106,8 @@ return [
         "welcome" => "Welcome",
         "your_password" => "Your password is:",
         "enter_our_site" => "Enter our site",
+    ],
+    'exist' => [
+        'role'=> 'The role already exists',
     ]
 ];
