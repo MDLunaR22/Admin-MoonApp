@@ -16,8 +16,8 @@
                         </h6>
                     @enderror
 
-                    <label for="permissions[]">@lang('app.inputs.permission')</label>
-                    <select class="js-example-basic-multiple w-100 " name="permissions[]" multiple="multiple">
+                    <label for="permissions[]" class="form-label">@lang('app.inputs.permission')</label>
+                    <select class="js-example-basic-multiple" style="width: 100%;" name="permissions[]" multiple="multiple">
                         @foreach ($permissions as $permission)
                             <option value="{{ $permission->name }}">{{ $permission->name }}</option>
                         @endforeach

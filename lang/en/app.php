@@ -72,6 +72,9 @@ return [
         "select_option" => "Select an option",
         "show_pass" => "Show Password",
         "permission" => "Permissions",
+        "role" => "Role",
+        "user" => "User",
+        "guard_name" => "Guard Name",
     ],
     "options" => [
         "create" => "Create",

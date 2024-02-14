@@ -31,15 +31,6 @@ class RoleController extends Controller
         return view('moonApp.role.add', compact('permissions'));
     }
 
-    public function buscar(Request $request)
-    {
-        $termino = $request->input('permissions');
-
-        $resultados = Permission::where('campo', 'LIKE', "%$termino%")->get(); // Reemplaza 'campo' con el nombre del campo que quieres buscar
-
-        return response($resultados);
-    }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -86,7 +77,7 @@ class RoleController extends Controller
     {
 
         $this->validate($request, [
-            "name" => "required|min:3",
+            "name" => "required|min:3|exists:roles,name",
             "permissions" => "array",
         ]);
         $role = Role::find($id);

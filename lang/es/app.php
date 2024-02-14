@@ -72,6 +72,9 @@ return [
         "order" => "Orden",
         "show_pass" => "Mostrar Contraseña",
         "permission" => "Permisos",
+        "role" => "Rol",
+        "user" => "Usuario",
+        "guard_name"=> "Nombre del Guard",
     ],
     "options" => [
         "create" => "Crear",
