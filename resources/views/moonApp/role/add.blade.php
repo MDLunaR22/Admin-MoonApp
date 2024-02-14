@@ -15,22 +15,6 @@
                             {{ $message }}
                         </h6>
                     @enderror
-
-                    <div class="mb-3">
-                        {{-- <input type="text" class="form-control" name="permissions" value="{{old('permissions')}}"> --}}
-                        <label for="permissions" class="form-label">@lang('app.inputs.permission')</label>
-                        <input id="permissions" type="text" name="permissions[]">
-                        <select name="permissions" multiple class="form-select">
-                            @foreach ($permissions as $permission)
-                                <option value="{{ $permission->id }}">{{ $permission->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    @error('permissions')
-                        <h6 class="alert alert-danger">
-                            {{ $message }}
-                        </h6>
-                    @enderror
                     <button type="submit" class="btn btn-primary">@lang('app.options.save')</button>
                     <a href="{{ route('viewRoles') }}" class="btn btn-secondary">@lang('app.options.cancel')</a>
                 </form>
